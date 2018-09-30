@@ -10,7 +10,16 @@ from collections import defaultdict
 SUNSET_ORANGE = (255, 162, 0)
 SUNSET_BLUE = (131, 187, 206)
 RANGE_COLOR = (210, 231, 210)
+DIM_GOLD = (229, 223, 178)
+DARK_GREY = (102, 102, 102)
+DARK_BLUE = (50,105,123)
 BLACK = (0, 0, 0)
+
+PALETTE = {
+    "SUNSET_START": DIM_GOLD,
+    "SUNSET_END": DARK_GREY,
+    "RANGE_START": DARK_BLUE,
+}
 
 PRINT_OUTLINES = False
 FILTER_FNS = {
@@ -72,7 +81,7 @@ def generateSky(img, skyline, startColor, endColor):
 
 
 img = Image.new("RGB", (WIDTH, HEIGHT))
-img, skyline = printRidges(img, generateRidges(350, GROUND, 20), RANGE_COLOR)
-generateSky(img, skyline, SUNSET_ORANGE, SUNSET_BLUE)
+img, skyline = printRidges(img, generateRidges(350, GROUND, 20), PALETTE["RANGE_START"])
+generateSky(img, skyline, PALETTE["SUNSET_START"], PALETTE["SUNSET_END"])
 img.filter(FILTER_FNS[FILTER_FN])
 img.convert("RGB").save('out.png')
